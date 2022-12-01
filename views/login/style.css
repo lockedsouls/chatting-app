@@ -29,6 +29,7 @@ body{
     position: absolute;
     right: 0;
     top: 0;
+    transition: all 0.3s;
     width: 100%;
     z-index: -1;
 }
@@ -62,6 +63,7 @@ body{
     border-radius: 10px;
     height: 100%;
     padding: 5px 10px;
+    transition: all 0.2s;
     width: 100%;
 }
 
@@ -69,10 +71,22 @@ body{
     border-radius: 10px;
     margin-bottom: 0;
     margin-top: 10px;
-    transition: all 0.05s;
+    transition: all 0.3s;
 }
 
 #button:active{
     background-color: rgba(255, 255, 255, 0.4);
     color:rgb(0, 0, 0);
+}
+
+/* Javascript class manipulation*/
+input.error{
+    outline: none;
+    background-color: rgba(129, 41, 41, 0.2) !important;
+    border: 2px solid rgba(156, 15, 15, 0.3) !important;
+}
+
+#background-blur.error{
+    background-color: rgba(104, 0, 0, 0.25) !important;
+    filter: blur(20px) !important;
 }
