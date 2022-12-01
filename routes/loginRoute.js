@@ -6,6 +6,6 @@ router.use(require("express").static(path));
 router.route("/")
     .get((req, res) => {
         res.sendFile(`${path}/index.html`);
-    })
+    });
 
 module.exports = router;
