@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="./rooms.css">
     <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
     <script defer src="./rooms.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>HI WORLD ROOM</h1>
+    <div id="container">
+        <div id="chat">
+            <div class="chat-message">
+                <span class="sender foreign">Admin:</span> <span class="message">Hello world</span>
+            </div>
+            <div class="chat-message">
+                <span class="sender local">Admin:</span> <span class="message">Hello world</span>
+            </div>
+            <div class="chat-message">
+                <span class="sender foreign">Admin:</span> <span class="message">Hello world</span>
+            </div>
+
+            <input id="chat-box">
+        </div>
+        <div id="rooms-list">
+
+        </div>
+    </div>
 </body>
 </html>

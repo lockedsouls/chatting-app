@@ -1,0 +1,74 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url("./wallhaven-5gd2d1.jpg");
+    background-position: -100px -200px;
+    height: 100vh;
+    margin: 0;
+    width: 100vw;
+}
+
+/* Container */
+#container{
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    padding: 10px;
+    width: 100%;
+}
+
+#container > #chat, #container > #rooms-list{
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 20px;
+}
+
+#container > #chat{
+    width: 79%;
+}
+
+#container > #rooms-list{
+    width: 20%;
+}
+
+/* Chat */
+#chat{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Chat message*/
+#chat > .chat-message{
+    background-color: rgba(81, 81, 81, 0.8);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 19px;
+    padding: 15px 10px 5px 10px;
+}
+
+#chat > .chat-message > .sender.foreign{
+    color: rgb(128, 255, 213);
+}
+
+#chat > .chat-message > .sender.local{
+    color: rgb(193, 117, 255);
+
+}
+
+#chat > #chat-box{
+    background-color: rgba(0, 0, 0, 0.7/2);
+    border: none;
+    border-bottom-right-radius: 18.3px;
+    border-bottom-left-radius: 18.3px;
+    bottom: 0;
+    font-size: 19px;
+    height: 60px;
+    letter-spacing: 2px;
+    outline: none;
+    padding: 5px 12px 5px 12px;
+    position: absolute;
+    width: 100%;
+}
