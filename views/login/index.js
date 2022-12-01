@@ -24,7 +24,14 @@ button.onclick = () => {
 
     validate(username, password, bg_blur, input_validity);
 
-    if (input_validity.username && input_validity.password) window.location = "http://localhost:3000/rooms";
+    if (input_validity.username && input_validity.password){
+        fetch("http://localhost:3000/api/users").then(res => res.json()).then(res => {
+            res.forEach(item => {
+                if (item.username == username.value && item.password == password.value) {window.location.replace("http://localhost:3000/rooms");}
+            })
+        })
+
+    }
 }
 
 function validate(username, password, bg_blur, input_validity){
