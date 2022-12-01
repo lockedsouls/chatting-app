@@ -17,7 +17,7 @@ body{
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 80px;
+    padding: 100px 80px 80px 80px;
     position: relative;
 }
 
@@ -35,7 +35,9 @@ body{
 
 #container > h1{
     color: rgb(255, 255, 255);
+    position: absolute;
     text-shadow: 0 1px 5px rgb(0, 0, 0);
+    top: 0;
 }
 
 
