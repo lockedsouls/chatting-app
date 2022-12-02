@@ -12,7 +12,9 @@ app.use("/api", require("./routes/usersAPIRoute"));
 app.use(express.static(`${__dirname}/views/rooms`));
 
 rooms_nsp.on("connection", socket => {
-    console.log(`${socket.id} has connected`);
+    socket.on("send-message", message => {
+        socket.broadcast.emit("receive-message", message);
+    })
 })
 
 app.route("/rooms")
