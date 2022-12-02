@@ -14,14 +14,4 @@ router.post("/users", async (req, res) => {
     }
 });
 
-// router.post("/users", async (req, res) => {
-//     try{
-//         const user = await Users.create({username: req.body.username, password: req.body.password});
-//         res.send(user);
-//         console.log(user);
-//     }catch(error){
-//         res.send(error.message);
-//     }
-// })
-
 module.exports = router;
