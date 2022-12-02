@@ -3,72 +3,71 @@
 }
 body{
     background-image: url("./wallhaven-5gd2d1.jpg");
-    background-position: -100px -200px;
+    background-position: -100px -300px;
     height: 100vh;
     margin: 0;
     width: 100vw;
 }
+::-webkit-scrollbar{
+    display: none;
+}
 
-/* Container */
 #container{
     display: flex;
     height: 100%;
     justify-content: space-between;
-    padding: 5px;
+    padding: 10px;
     width: 100%;
 }
 
-#container > #chat, #container > #rooms-list{
-    background-color: rgba(0, 0, 0, 0.8);
-    border: 2px solid rgb(31, 31, 31);
-    border-radius: 20px;
-}
-
-#container > #chat{
-    width: 79.55%;
-}
-
-#container > #rooms-list{
-    width: 20%;
-}
-
-/* Chat */
-#chat{
-    overflow: hidden;
+#rooms-container, #chat-container{
+    background-color: rgba(0, 0, 0, 0.75);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
-    position: relative;
+    height: 100%;
 }
 
-/* Chat message*/
-#chat > .chat-message{
-    background-color: rgba(81, 81, 81, 0.8);
-    color: white;
+#rooms-container{
+    width: 14%;
+}
+
+#chat-container{
+    color: rgb(255, 255, 255);
     font-family: 'Courier New', Courier, monospace;
-    font-size: 19px;
-    padding: 15px 10px 5px 10px;
+    font-size: 16px;
+    height: 100%;
+    position: relative;
+    width: 85%;
 }
 
-#chat > .chat-message > .sender.foreign{
-    color: rgb(128, 255, 213);
+#chats{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    font-size: inherit;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
-#chat > .chat-message > .sender.local{
-    color: rgb(193, 117, 255);
-
+.chat-message{
+    background-color: rgba(155, 155, 155, 0.5);
 }
 
-#chat > #chat-box{
-    background-color: rgba(0, 0, 0, 0.7/2);
+#chat-input{
+    background-color: rgb(90, 90, 90);
     border: none;
-    border-bottom-right-radius: 18.3px;
-    border-bottom-left-radius: 18.3px;
+    border-radius: 2.5px;
     bottom: 0;
-    font-size: 19px;
-    height: 60px;
-    letter-spacing: 2px;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    height: 50px;
     outline: none;
-    padding: 5px 12px 5px 12px;
+    padding: 0 10px;
     position: absolute;
     width: 100%;
 }
