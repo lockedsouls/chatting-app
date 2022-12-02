@@ -1,3 +1,5 @@
+if (window.localStorage.getItem("client")) window.location.replace("http://localhost:3000/rooms");
+
 const button = document.querySelector("#button");
 button.onclick = () => {
     const username = document.querySelector("#username");
@@ -25,12 +27,18 @@ button.onclick = () => {
     validate(username, password, bg_blur, input_validity);
 
     if (input_validity.username && input_validity.password){
-        fetch("http://localhost:3000/api/users").then(res => res.json()).then(res => {
-            res.forEach(item => {
-                if (item.username == username.value && item.password == password.value) {window.location.replace("http://localhost:3000/rooms");}
-            })
+        fetch("http://localhost:3000/api/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({username: username.value, password: password.value})
+        }).then(res => res.json()).then(res => {
+            if (res) {
+                window.localStorage.setItem("client", JSON.stringify({"username": username.value}));
+                window.location.replace("http://localhost:3000/rooms");
+            }
         })
-
     }
 }
 
