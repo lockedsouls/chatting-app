@@ -33,12 +33,12 @@ button.onclick = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({username: username.value, password: password.value})
-        }).then(res => res.json()).then(res => {
-            if (res) {
+        }).then(res => {
+            if (res.status == 202) {
                 window.localStorage.setItem("client", JSON.stringify({"username": username.value}));
                 window.location.replace("http://localhost:3000/rooms");
             }
-        })
+        }).catch(error => console.log(error));
     }
 }
 
