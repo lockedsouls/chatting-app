@@ -30,7 +30,10 @@ button.onclick = () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username: username.value, password: password.value})
+            body: JSON.stringify({
+                client: {username: username.value, password: password.value},
+                type: "login"
+            })
         }).then(res => {
             if (res.status == 202) {
                 window.sessionStorage.setItem("client", JSON.stringify({"username": username.value}));
@@ -51,4 +54,17 @@ function validate(username, password, bg_blur, input_validity){
         bg_blur.classList.add("error");
         input_validity.password = 0;
     }
+}
+
+function register(username, password){
+    const users = fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            client: {username: username, password: password},
+            type: "register"
+        })
+    }).then(res => res.text()).then(res => console.log(res));
 }

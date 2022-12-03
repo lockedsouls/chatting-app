@@ -44,6 +44,9 @@ rooms_nsp.on("connection", socket => {
             console.log(error.message);
         }
     })
+    socket.on("get-messages", async () => {
+        socket.emit("render-messages", await Logs.find({}, {sender: 1, message: 1, sent_at: 1}));
+    })
     socket.on("disconnect", () => {
         for (let i=0; i<sender_colors.length; i++){
             if (sender_colors[i].occupied == socket.id) {

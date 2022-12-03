@@ -3,8 +3,13 @@ if (!window.sessionStorage.getItem("client")) window.location.replace("http://lo
 const socket = io("http://localhost:3000/rooms");
 
 socket.on("connect", () => {
-    console.log("huh")
     socket.username = JSON.parse(window.sessionStorage.getItem("client")).username;
+    socket.emit("get-messages");
+    socket.on("render-messages", logs => {
+        logs.forEach(item => {
+            addChat(`${item.sent_at.date}, ${item.sent_at.time.substring(0, 5)} | ${item.sender}`, item.message, "white");
+        })
+    })
 });
 
 socket.on("receive-message", ({sender, message, color}) => addChat(sender, message, color)); 
