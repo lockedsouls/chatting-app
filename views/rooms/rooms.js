@@ -25,7 +25,12 @@ function addChat(sender, message, color){
 document.querySelector("#chat-input").addEventListener("keyup", event => {
     if (event.key == "Enter" && event.target.value != ""){
         addChat(socket.username, event.target.value, socket.color);
-        socket.emit("send-message", socket.username, event.target.value);
+        const temp = new Date();
+        const date_time = {
+            date: `${temp.getDate()}/${temp.getMonth()}/${temp.getFullYear()}`,
+            time: temp.toTimeString().substring(0, 8)
+        }
+        socket.emit("send-message", socket.username, event.target.value, date_time);
         event.target.value = "";
     }
 })

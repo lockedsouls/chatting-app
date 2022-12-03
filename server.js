@@ -4,6 +4,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server, {cors: "*"});
 const rooms_nsp = io.of("/rooms");
 const mongoose = require("mongoose");
+const Logs = require("./db/Logs");
 
 mongoose.connect("mongodb+srv://admin:parol@chatting-app.0mv6qst.mongodb.net/?retryWrites=true&w=majority", () => console.log("Connected to db"));
 app.use(require("cors")());
@@ -28,7 +29,7 @@ rooms_nsp.on("connection", socket => {
             break;
         }
     }
-    socket.on("send-message", (sender, message) => {
+    socket.on("send-message", async (sender, message, date_time) => {
         let color = "";
         for (let i=0; i<sender_colors.length; i++){
             if (sender_colors[i].occupied == socket.id) {
@@ -37,9 +38,12 @@ rooms_nsp.on("connection", socket => {
             }
         }
         socket.broadcast.emit("receive-message", {sender: sender, message: message, color: color});
+        try{
+            await Logs.create({sender: sender, message: message, sent_at: date_time});
+        }catch(error){
+            console.log(error.message);
+        }
     })
-
-
     socket.on("disconnect", () => {
         for (let i=0; i<sender_colors.length; i++){
             if (sender_colors[i].occupied == socket.id) {
