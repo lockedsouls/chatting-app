@@ -11,9 +11,42 @@ app.use("/", require("./routes/loginRoute"));
 app.use("/api", require("./routes/usersAPIRoute"));
 app.use(express.static(`${__dirname}/views/rooms`));
 
+const sender_colors = [
+    {color: "rgb(255, 226, 57)", occupied: null},
+    {color: "rgb(0, 255, 84)", occupied: null},
+    {color: "rgb(255, 0, 0)", occupied: null},
+    {color: "rgb(255, 40, 40)", occupied: null},
+    {color: "rgb(128, 216, 202)", occupied: null},
+    {color: "rgb(113,90,165)", occupied: null}
+];
+
 rooms_nsp.on("connection", socket => {
-    socket.on("send-message", message => {
-        socket.broadcast.emit("receive-message", message);
+    for (let i=0; i<sender_colors.length; i++){
+        if (!sender_colors[i].occupied) {
+            socket.emit("get-color", sender_colors[i].color);
+            sender_colors[i].occupied = socket.id;
+            break;
+        }
+    }
+    socket.on("send-message", (sender, message) => {
+        let color = "";
+        for (let i=0; i<sender_colors.length; i++){
+            if (sender_colors[i].occupied == socket.id) {
+                color = sender_colors[i].color;
+                break;
+            }
+        }
+        socket.broadcast.emit("receive-message", {sender: sender, message: message, color: color});
+    })
+
+
+    socket.on("disconnect", () => {
+        for (let i=0; i<sender_colors.length; i++){
+            if (sender_colors[i].occupied == socket.id) {
+                sender_colors[i].occupied = null;
+                break;
+            }
+        }
     })
 })
 
